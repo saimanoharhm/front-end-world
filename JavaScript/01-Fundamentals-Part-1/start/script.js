@@ -6,20 +6,20 @@ console.log(40 + 8 + 23 - 10);
 
 ////////////////////////////////////
 // Values and Variables
-console.log("Jonas");
+console.log("saimanohar");
 console.log(23);
 
-let firstName = "Matilda";
+let firstName = "saimanohar";
 
 console.log(firstName);
 console.log(firstName);
 console.log(firstName);
 
 // Variable name conventions
-let jonas_matilda = "JM";
+let saimanohar = "JM";
 let $function = 27;
 
-let person = "jonas";
+let person = "saimanohar";
 let PI = 3.1415;
 
 let myFirstJob = "Coder";
@@ -38,7 +38,7 @@ console.log(javascriptIsFun);
 // console.log(typeof true);
 console.log(typeof javascriptIsFun);
 // console.log(typeof 23);
-// console.log(typeof 'Jonas');
+// console.log(typeof 'saimanohar');
 
 javascriptIsFun = 'YES!';
 console.log(typeof javascriptIsFun);
@@ -71,14 +71,14 @@ console.log(lastName);
 // Basic Operators
 // Math operators
 const now = 2037;
-const ageJonas = now - 1991;
+const agesaimanohar = now - 1991;
 const ageSarah = now - 2018;
-console.log(ageJonas, ageSarah);
+console.log(agesaimanohar, ageSarah);
 
-console.log(ageJonas * 2, ageJonas / 10, 2 ** 3);
+console.log(agesaimanohar * 2, agesaimanohar / 10, 2 ** 3);
 // 2 ** 3 means 2 to the power of 3 = 2 * 2 * 2
 
-const firstName = 'Jonas';
+const firstName = 'saimanohar';
 const lastName = 'Schmedtmann';
 console.log(firstName + ' ' + lastName);
 
@@ -92,7 +92,7 @@ x--;
 console.log(x);
 
 // Comparison operators
-console.log(ageJonas > ageSarah); // >, <, >=, <=
+console.log(agesaimanohar > ageSarah); // >, <, >=, <=
 console.log(ageSarah >= 18);
 
 const isFullAge = ageSarah >= 18;
@@ -102,7 +102,7 @@ console.log(now - 1991 > now - 2018);
 ////////////////////////////////////
 // Operator Precedence
 const now = 2037;
-const ageJonas = now - 1991;
+const agesaimanohar = now - 1991;
 const ageSarah = now - 2018;
 
 console.log(now - 1991 > now - 2018);
@@ -111,8 +111,8 @@ let x, y;
 x = y = 25 - 10 - 5; // x = y = 10, x = 10
 console.log(x, y);
 
-const averageAge = (ageJonas + ageSarah) / 2;
-console.log(ageJonas, ageSarah, averageAge);
+const averageAge = (agesaimanohar + ageSarah) / 2;
+console.log(agesaimanohar, ageSarah, averageAge);
 */
 
 ////////////////////////////////////
@@ -150,16 +150,16 @@ console.log(BMIMark, BMIJohn, markHigherBMI);
 
 ////////////////////////////////////
 // Strings and Template Literals
-const firstName = 'Jonas';
+const firstName = 'saimanohar';
 const job = 'teacher';
 const birthYear = 1991;
 const year = 2037;
 
-const jonas = "I'm " + firstName + ', a ' + (year - birthYear) + ' year old ' + job + '!';
-console.log(jonas);
+const saimanohar = "I'm " + firstName + ', a ' + (year - birthYear) + ' year old ' + job + '!';
+console.log(saimanohar);
 
-const jonasNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
-console.log(jonasNew);
+const saimanoharNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
+console.log(saimanoharNew);
 
 console.log(`Just a regular string...`);
 
@@ -237,7 +237,7 @@ const inputYear = '1991';
 console.log(Number(inputYear), inputYear);
 console.log(Number(inputYear) + 18);
 
-console.log(Number('Jonas'));
+console.log(Number('saimanohar'));
 console.log(typeof NaN);
 
 console.log(String(23), 23);
@@ -258,7 +258,7 @@ console.log(n);
 // 5 falsy values: 0, '', undefined, null, NaN
 console.log(Boolean(0));
 console.log(Boolean(undefined));
-console.log(Boolean('Jonas'));
+console.log(Boolean('saimanohar'));
 console.log(Boolean({}));
 console.log(Boolean(''));
 
@@ -423,7 +423,7 @@ if (23 > 10) {
   const str = '23 is bigger';
 }
 
-const me = 'Jonas';
+const me = 'saimanohar';
 console.log(`I'm ${2037 - 1991} years old ${me}`);
 
 ////////////////////////////////////
@@ -444,7 +444,6 @@ console.log(drink2);
 
 console.log(`I like to drink ${age >= 18 ? 'wine 🍷' : 'water 💧'}`);
 */
-
 
 ////////////////////////////////////
 // Coding Challenge #4
