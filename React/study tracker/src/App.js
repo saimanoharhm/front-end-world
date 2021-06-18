@@ -1,6 +1,8 @@
-import SubjectItem from "./components/SubjectItem";
+import React from "react";
+import SubjectItem from "./components/Subjects/SubjectItem";
+import NewSubject from "./components/NewSubject/NewSubject";
 
-function App() {
+const App = () => {
   const Subjects = [
     {
       id: "s1",
@@ -22,12 +24,24 @@ function App() {
       date: new Date(2021, 3, 12),
     },
   ];
+
+  const addSubjectHandler = (subject) => {
+    console.log("In App.js");
+    console.log(subject);
+  };
+  // return React.createElement(
+  //   "div",
+  //   {},
+  //   React.createElement("h2", {}, "Let's get started!"),
+  //   React.createElement(SubjectItem, { item: Subjects })
+  // );
+
   return (
     <div>
-      <h2>Let's get started!</h2>
+      <NewSubject onAddSubject={addSubjectHandler} />
       <SubjectItem item={Subjects} />
     </div>
   );
-}
+};
 
 export default App;

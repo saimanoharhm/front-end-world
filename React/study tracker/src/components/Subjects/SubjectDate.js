@@ -1,5 +1,5 @@
 import "./SubjectDate.css";
-function SubjectDate(props) {
+const SubjectDate = (props) => {
   const month = props.date.toLocaleString("en-US", { month: "long" });
   const day = props.date.toLocaleString("en-Us", { day: "2-digit" });
   const year = props.date.getFullYear();
@@ -10,5 +10,5 @@ function SubjectDate(props) {
       <div className="subject-date__day">{day}</div>
     </div>
   );
-}
+};
 export default SubjectDate;
