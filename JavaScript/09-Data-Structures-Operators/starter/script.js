@@ -52,6 +52,12 @@ const restaurant = {
   },
 };
 
+//Maps
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenze, Italy');
+console.log(rest.set(2, 'Lisbon, Portugal'));
+
 //Loop through the object
 // Property NAMES
 // const properties = Object.keys(openingHours);
@@ -398,27 +404,27 @@ GOOD LUCK �
 //   console.log(`Odd of ${teamStr} ${odd}`);
 // }
 
-const orderSet = new Set([
-  'Pasta',
-  'Pizza',
-  'Pizza',
-  'Risotto',
-  'Pasta',
-  'Pizza',
-]);
-console.log(orderSet);
-console.log(new Set('Sai'));
+// const orderSet = new Set([
+//   'Pasta',
+//   'Pizza',
+//   'Pizza',
+//   'Risotto',
+//   'Pasta',
+//   'Pizza',
+// ]);
+// console.log(orderSet);
+// console.log(new Set('Sai'));
 
-console.log(orderSet.size);
-console.log(orderSet.has('Pizza'));
-console.log(orderSet.has('Bread'));
-orderSet.add('Garlic Bread');
-orderSet.add('Garlic Bread');
-orderSet.delete('Risotto');
-console.log(orderSet);
+// console.log(orderSet.size);
+// console.log(orderSet.has('Pizza'));
+// console.log(orderSet.has('Bread'));
+// orderSet.add('Garlic Bread');
+// orderSet.add('Garlic Bread');
+// orderSet.delete('Risotto');
+// console.log(orderSet);
 
-for (const order of orderSet) console.log(order);
-// Example
-const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
-const staffUnique = [...new Set(staff)];
-console.log(staffUnique);
+// for (const order of orderSet) console.log(order);
+// // Example
+// const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+// const staffUnique = [...new Set(staff)];
+// console.log(staffUnique);
