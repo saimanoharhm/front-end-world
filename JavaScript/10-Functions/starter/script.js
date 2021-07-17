@@ -44,5 +44,14 @@
 // checkIn(flight, sai);
 
 const oneWord = str => {
-  return str.replace(/ /g);
+  return str.replace(/ /g, '').toLowerCase();
 };
+
+const upperFirstWord = str => {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+
+//Higher-order function
+const transformer = function (str, fn) {};
+transformer('JavaScript is the best!', upperFirstWord);
