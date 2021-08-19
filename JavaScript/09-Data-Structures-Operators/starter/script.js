@@ -48,12 +48,86 @@ const restaurant = {
   },
 };
 
+// Coding Challenge-4
+/*
+Write a program that receives a list of variable names written in underscore_case 
+and convert them to camelCase.
+The input will come from a textarea inserted into the DOM (see code below to 
+insert the elements), and conversion will happen when the button is pressed.
+Test data (pasted to textarea, including spaces):
+underscore_case
+first_name
+Some_Variable 
+calculate_AGE
+delayed_departure
+Should produce this output (5 separate console.log outputs):
+underscoreCase       ✅
+firstName           ✅✅
+someVariable       ✅✅✅
+calculateAge      ✅✅✅✅
+delayedDeparture ✅✅✅✅✅
+Hints:
+§ Remember which character defines a new line in the textarea �
+§ The solution only needs to work for a variable made out of 2 words, like a_b
+§ Start without worrying about the ✅. Tackle that only after you have the variable 
+name conversion working �
+§ This challenge is difficult on purpose, so start watching the solution in case 
+you're stuck. Then pause and continue!
+Afterwards, test with your own test data!
+GOOD LUCK �
+*/
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
 // Strings - 3
-console.log('a+very+nice+string'.split('+'));
-console.log('Sai Manohar'.split(' '));
+// Split and Join
+// console.log('a+very+nice+string'.split('+'));
+// console.log('Sai Manohar'.split(' '));
 
-const
+// const [firstName, lastName] = 'Sai Manohar'.split(' ');
+// console.log(firstName, lastName);
 
+// const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+// console.log(newName);
+
+// const capitalizeName = function (name) {
+//   const names = name.split(' ');
+//   console.log(names);
+//   const namesUpper = [];
+
+//   for (const n of names) {
+//     // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+//     namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+//   }
+//   console.log(namesUpper.join(' '));
+// };
+// capitalizeName('sai ann manohar davis');
+// capitalizeName('annam sai manohar');
+
+//Padding
+// const message = 'Go to gate 23!';
+// console.log(message.padStart(20, '+').padEnd(30, '+')); // 25 is basically total lenght of the string.
+// console.log('Sai'.padStart(20, '+').padEnd(30, '+'));
+
+// const maskCreditCard = function (number) {
+//   const str = number + '';
+//   const last = str.slice(-4);
+//   return last.padStart(str.length, '*');
+// };
+
+// console.log(maskCreditCard(45698745615555664));
+// console.log(maskCreditCard('45456545454564554'));
+
+//Repeat
+// const message2 = 'Bad weather... All Departues Delayed...';
+// console.log(message2.repeat(5));
+
+// const planesInLine = function (n) {
+//   console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`);
+// };
+// planesInLine(5);
+// planesInLine(3);
+// planesInLine(12);
 
 // // Strings - 2
 // const airline = 'TAP Air Portugal';
@@ -70,7 +144,7 @@ const
 
 // //Comparing emails
 // const email = 'saimanohar@annam.co.in';
-// const loginEmail = '  SaiManohar@Annam.co.in';
+// const loginEma54il = '  SaiManohar@Annam.co.in';
 // const lowerEmail = loginEmail.toLowerCase();
 // const trimmedEmail = loginEmail.trim();
 // console.log(loginEmail + '\n' + trimmedEmail);
@@ -86,7 +160,7 @@ const
 
 // const announcement =
 //   'All passengers come to boarding door 23, Boarding door 23!';
-// console.log(announcement.replace('door', 'gate'));
+// console.log(anno54uncement.replace('door', 'gate'));
 
 // console.log(announcement.replace(/door/g, 'gate'));
 
