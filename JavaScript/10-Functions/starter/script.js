@@ -105,101 +105,101 @@
 
 // The Call and Apply Methods
 
-const lufthansa = {
-  airline: 'Lufthansa',
-  lataCode: 'LH',
-  bookings: [],
-  // book : function(){}
-  book(flightNum, name) {
-    console.log(`${name} booked a seat on ${this.airline} flight
-    ${this.lataCode}${flightNum}`);
-    this.bookings.push({ flight: `${this.lataCode}${flightNum}`, name });
-  },
-};
+// const lufthansa = {
+//   airline: 'Lufthansa',
+//   lataCode: 'LH',
+//   bookings: [],
+//   // book : function(){}
+//   book(flightNum, name) {
+//     console.log(`${name} booked a seat on ${this.airline} flight
+//     ${this.lataCode}${flightNum}`);
+//     this.bookings.push({ flight: `${this.lataCode}${flightNum}`, name });
+//   },
+// };
 
-lufthansa.book(239, 'Sai Manohar');
-lufthansa.book(835, 'Annam Rambo');
-console.log(lufthansa);
+// lufthansa.book(239, 'Sai Manohar');
+// lufthansa.book(835, 'Annam Rambo');
+// console.log(lufthansa);
 
-const eurowings = {
-  airline: 'Eurowings',
-  lataCode: 'EW',
-  bookings: [],
-};
+// const eurowings = {
+//   airline: 'Eurowings',
+//   lataCode: 'EW',
+//   bookings: [],
+// };
 
-const book = lufthansa.book;
+// const book = lufthansa.book;
 
-//Doesn't work
-// book(23, 'Hari');
-book.call(eurowings, 23, 'Hari');
-console.log(eurowings);
-
-book.call(lufthansa, 45, 'James');
-console.log(lufthansa);
-
-const swiss = {
-  airline: 'Swiss Air Lines',
-  lataCode: 'LX',
-  bookings: [],
-};
-
-book.call(swiss, 583, 'Sai Manohar');
-console.log(swiss);
-
-//// Apply Method ///////
-const flightData = [587, 'George Cooper'];
-book.apply(swiss, flightData);
-console.log(swiss);
-
-book.call(swiss, ...flightData);
-console.log(swiss);
-
-// Bind Method
+// //Doesn't work
+// // book(23, 'Hari');
 // book.call(eurowings, 23, 'Hari');
+// console.log(eurowings);
 
-const bookEW = book.bind(eurowings);
-const bookLR = book.bind(lufthansa);
-const bookLX = book.bind(swiss);
+// book.call(lufthansa, 45, 'James');
+// console.log(lufthansa);
 
-bookEW(23, 'Hari');
+// const swiss = {
+//   airline: 'Swiss Air Lines',
+//   lataCode: 'LX',
+//   bookings: [],
+// };
 
-const bookEW23 = book.bind(eurowings, 23);
-bookEW23('Annam Sai Manohar');
-bookEW23('Rambo Annam');
+// book.call(swiss, 583, 'Sai Manohar');
+// console.log(swiss);
 
-// With Event Listeners
-lufthansa.planes = 300;
-lufthansa.buyPlane = function () {
-  console.log(this);
+// //// Apply Method ///////
+// const flightData = [587, 'George Cooper'];
+// book.apply(swiss, flightData);
+// console.log(swiss);
 
-  this.planes++;
-  console.log(this.planes);
-};
+// book.call(swiss, ...flightData);
+// console.log(swiss);
 
-document
-  .querySelector('.buy')
-  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+// // Bind Method
+// // book.call(eurowings, 23, 'Hari');
 
-// Partial Application
+// const bookEW = book.bind(eurowings);
+// const bookLR = book.bind(lufthansa);
+// const bookLX = book.bind(swiss);
 
-const addTax = (rate, value) => value + value * rate;
-console.log(addTax(0.1, 200));
+// bookEW(23, 'Hari');
 
-const addVAT = addTax.bind(null, 0.23);
-// const addTax = value => value + value * 0.23;
+// const bookEW23 = book.bind(eurowings, 23);
+// bookEW23('Annam Sai Manohar');
+// bookEW23('Rambo Annam');
 
-console.log(addVAT(100));
-console.log(addVAT(23));
+// // With Event Listeners
+// lufthansa.planes = 300;
+// lufthansa.buyPlane = function () {
+//   console.log(this);
 
-const addtaxRate = rate => {
-  return value => {
-    return value + value * rate;
-  };
-};
+//   this.planes++;
+//   console.log(this.planes);
+// };
 
-const addvat = addtaxRate(0.23);
-console.log(addvat(100));
-console.log(addvat(23));
+// document
+//   .querySelector('.buy')
+//   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// // Partial Application
+
+// const addTax = (rate, value) => value + value * rate;
+// console.log(addTax(0.1, 200));
+
+// const addVAT = addTax.bind(null, 0.23);
+// // const addTax = value => value + value * 0.23;
+
+// console.log(addVAT(100));
+// console.log(addVAT(23));
+
+// const addtaxRate = rate => {
+//   return value => {
+//     return value + value * rate;
+//   };
+// };
+
+// const addvat = addtaxRate(0.23);
+// console.log(addvat(100));
+// console.log(addvat(23));
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -235,11 +235,147 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 
-const poll = {
-  question: 'What is your favourite programming language?',
-  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-  // This generates [0, 0, 0, 0]. More in the next section!
-  answers: new Array(4).fill(0),
-};
+// const poll = {
+//   question: 'What is your favourite programming language?',
+//   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+//   // This generates [0, 0, 0, 0]. More in the next section!
+//   answers: new Array(4).fill(0),
+//   registerNewAnswer() {
+//     // Get answer
+//     const answer = Number(
+//       prompt(
+//         `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+//       )
+//     );
 
-poll.registerNewAnswer = prompt(`${this.question} \n${this.options}  `);
+//     console.log(answer);
+
+//     // Register answer
+//     typeof answer === 'number' &&
+//       answer < this.answers.length &&
+//       this.answers[answer]++;
+
+//     this.displayResults();
+//     this.displayResults('string');
+//   },
+//   displayResults(type = 'array') {
+//     if (type === 'array') {
+//       console.log(this.answers);
+//     } else if (type === 'string') {
+//       console.log(`Poll results are ${this.answers.join(',')}`);
+//     }
+//   },
+// };
+
+// // poll.registerNewAnswer();
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+
+// [5, 2, 3]
+// [1, 5, 3, 9, 6, 1]
+
+//////// Immediately Invoked function Expressions //////////
+// const runOnce = function () {
+//   console.log('This will never run again');
+// };
+
+// runOnce();
+
+// // IIFE
+// (function () {
+//   console.log('This will never run again!');
+//   const isPrivate = 23;
+// })();
+
+// // console.log(isPrivate);
+// (() => console.log('This will ALSO never run again!'))();
+
+// {
+//   const isPrivate = 23;
+//   var notPrivate = 40;
+// }
+
+// // console.log(isPrivate);
+// console.log(notPrivate);
+
+/////Closures///////
+
+// const secureBooking = function () {
+//   let passengerCount = 0;
+
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passengers.`);
+//   };
+// };
+
+// const booker = secureBooking();
+
+// booker();
+// booker();
+// booker();
+// console.dir(booker);
+
+/////Closures Practice///////
+
+// Example-1
+// let f;
+// const g = function () {
+//   const a = 23;
+//   f = function () {
+//     console.log(a * 2);
+//   };
+// };
+
+// const h = function () {
+//   const b = 777;
+//   f = function () {
+//     console.log(b * 2);
+//   };
+// };
+
+// g();
+// f();
+
+// // Re-assigning f function
+// h();
+// f();
+// console.dir(f);
+
+// Example-2
+
+// const boardPassengers = function (n, wait) {
+//   const perGroup = n / 3;
+//   setTimeout(() => {
+//     console.log(`We are now boarding all ${n} passengers`);
+//     console.log(`There are 3 groups, each with ${perGroup} passengers`);
+//   }, wait * 1000);
+
+//   console.log(`Will start boarding in ${wait} seconds.`);
+// };
+
+// boardPassengers(180, 3);
+
+// Challenge -2
+
+/* 
+This is more of a thinking challenge than a coding challenge �
+Your tasks:
+1. Take the IIFE below and at the end of the function, attach an event listener that 
+changes the color of the selected h1 element ('header') to blue, each time 
+the body element is clicked. Do not select the h1 element again!
+2. And now explain to yourself (or someone around you) why this worked! Take all 
+the time you need. Think about when exactly the callback function is executed, 
+and what that means for the variables involved in this example.
+*/
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  document.querySelector('body').addEventListener('click', () => {
+    header.style.color = 'blue';
+  });
+})();
