@@ -61,11 +61,13 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
   // .textContent = 0
 
-  movements.forEach((mov, i) => {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
@@ -176,6 +178,20 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add Movement
+    currentAccount.movements.push(amount);
+
+    //Update UI
+    updateUI(currentAccount);
+    inputLoanAmount.value = '';
+  }
+});
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -186,8 +202,22 @@ btnClose.addEventListener('click', function (e) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
     );
+
+    //Delete Account
     accounts.splice(index, 1);
+
+    //Hide UI
+    containerApp.style.opacity = 0;
   }
+
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 // console.log(accounts);
@@ -487,3 +517,148 @@ GOOD LUCK �
 // console.log(accounts);
 // const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 // console.log(account);
+
+///SOME AND EVERY METHOD///
+// console.log(movements);
+
+// //EQUALITY
+// console.log(movements.includes(-130));
+
+// // CONDITION
+
+// const anyDeposits = movements.some(mov => mov > 0);
+// console.log(anyDeposits);
+
+// Every It means every element in the array should satisfy the condition
+
+// console.log(movements.every(mov => mov > 0));
+// console.log(account4.movements.every(mov => mov > 0));
+
+// // Separate callback
+// const deposit = mov => mov > 0;
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
+///FLAT AND FLATMAP METHOD///
+
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat());
+
+// const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+// console.log(arrDeep.flat(2));
+
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements);
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance);
+
+// //flat
+// const overalBalance = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance);
+
+// // flatMap
+// const overalBalance2 = accounts
+//   .faltMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance2);
+
+// Sorting Arrays
+
+// // Strings
+// const owners = ['Sai', 'Rambo', 'Hari', 'Rakesh', 'Martha'];
+// console.log(owners.sort());
+// console.log(owners);
+
+// // Numbers
+// console.log(movements);
+// // console.log(movements.sort());
+
+// // return < 0,A,B
+// // return > 0,B,A
+
+// // Ascending order
+// // movements.sort((a, b) => {
+// //   if (a > b) return 1; // Switch the order
+// //   if (a < b) return -1; // Keep the order
+// // });
+// movements.sort((a, b) => a - b);
+// console.log(movements);
+
+// // Descending order
+// // movements.sort((a, b) => {
+// //   if (a > b) return -1; // Keep the order
+// //   if (a < b) return 1; // Switch the order
+// // });
+// movements.sort((a, b) => b - a);
+
+// console.log(movements);
+
+// const arr = [1, 2, 3, 4, 5, 6, 7];
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// const x = new Array(7);
+// console.log(x);
+
+// x.fill(1, 3, 5);
+// console.log(x);
+
+// arr.fill(23, 2, 6); // It will fill 23 in the 2 - 6 indexes
+// console.log(arr);
+
+// // Array.from
+// const y = Array.from({ length: 7 }, () => 1);
+// console.log(y);
+
+// const z = Array.from({ length: 7 }, (_, i) => i + 1);
+// console.log(z);
+
+// labelBalance.addEventListener('click', function () {
+//   const movementsUI = Array.from(
+//     document.querySelectorAll('.movements__value')
+//   );
+//   console.log(movementsUI.map(el => Number(el.textContent.replace('₹', ''))));
+// });
+
+//Array Method Pratice
+
+//1.
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositSum);
+
+//2.
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov > 1000).length;
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  // .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+
+console.log(numDeposits1000);
+
+// Prefixed ++ operator
+let a = 10;
+console.log(++a);
+
+// 3.
+const sums = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(sums);
