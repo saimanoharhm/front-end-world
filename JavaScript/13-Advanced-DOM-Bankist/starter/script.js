@@ -476,3 +476,17 @@ slider();
 // [...h1.parentElement.children].forEach(function (el) {
 //   if (el !== h1) el.style.transform = 'scale(0.5)';
 // });
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!', e);
+}); // It will triger once after html and js code is loaded and it won't wait for other external files and images to load whereas window it will wait for everything to load.  
+
+window.addEventListener('load',function(e){
+  console.log('Page fully loaded',e);
+});
+
+window.addEventListener('beforeunload',function(e){
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = '';
+});
