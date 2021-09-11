@@ -36,3 +36,10 @@ Person.prototype.calcAge = function () {
 
 sai.calcAge();
 matilda.calcAge();
+
+console.log(sai.__proto__);
+console.log(sai.__proto__ === Person.prototype);
+
+console.log(Person.prototype.isPrototypeOf(sai));
+console.log(Person.prototype.isPrototypeOf(matilda));
+console.log(Person.prototype.isPrototypeOf(Person));
