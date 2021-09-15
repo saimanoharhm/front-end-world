@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
+    <header class="main-header">
       <h1>📘 The Code Magazine</h1>
       <nav>
         <a href="blog.html">Blog</a>
@@ -25,7 +25,7 @@
           width="58"
           height="58"
         />
-        <p>
+        <p id="author">
           Posted by <strong>Annam Sai Manohar</strong> on Sunday, September 12th
           2021
         </p>
@@ -60,7 +60,7 @@
       </p>
       <p>In HTML, each element is made up of 3 parts:</p>
       <ol>
-        <li>The opening tag</li>
+        <li class="first-li">The opening tag</li>
         <li>The closing tag</li>
         <li>The actual element</li>
       </ol>
@@ -80,10 +80,12 @@
         web. Here are 5 of them:
       </p>
       <ul>
-        <li>To be able to use the fundamental web dev language</li>
+        <li class="first-li">
+          To be able to use the fundamental web dev language
+        </li>
         <li>
           To hand-craft beautiful websites instead of relying on tools like
-          Worpress or Wix
+          Wordpress or Wix
         </li>
         <li>To build web applications</li>
         <li>To impress friends To have fun 😃</li>
@@ -92,7 +94,7 @@
     </article>
     <aside>
       <h4>Related posts</h4>
-      <ul>
+      <ul class="related">
         <li>
           <img
             src="Images/related-1.jpg"
@@ -100,9 +102,9 @@
             width="75"
             height="75"
           />
-          <p href="#">How to learn Web Development</p>
+          <a href="#">How to learn Web Development</a>
         </li>
-        <h3>By Annam Sai Manohar</h3>
+        <p class="related-author">By Annam Sai Manohar</p>
         <li>
           <img
             src="Images/related-2.jpg"
@@ -110,9 +112,9 @@
             width="75"
             height="75"
           />
-          <p href="#">The Unknown Powers of CSS</p>
+          <a href="#">The Unknown Powers of CSS</a>
         </li>
-        <h3>By Rambo</h3>
+        <p class="related-author">By Rambo</p>
         <li>
           <img
             src="Images/related-3.jpg"
@@ -120,11 +122,15 @@
             width="75"
             height="75"
           />
-          <p href="#">Why JavaScript is Awesome</p>
+          <a href="#">Why JavaScript is Awesome</a>
         </li>
-        <h3>By Hari Krishna</h3>
+        <p class="related-author">By Hari Krishna</p>
       </ul>
     </aside>
-    <footer>Copyright &copy; 2021 by The Code Magazine</footer>
+    <footer>
+      <p id="copyright" class="copyright text">
+        Copyright &copy; 2021 by The Code Magazine
+      </p>
+    </footer>
   </body>
 </html>
