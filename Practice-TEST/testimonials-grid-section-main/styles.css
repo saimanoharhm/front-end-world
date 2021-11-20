@@ -1,0 +1,142 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: #555;
+}
+
+.attribution {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+.container {
+  width: 120rem;
+  /* background-color: #eee; */
+  margin: 0 auto;
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 2.6rem;
+  position: relative;
+}
+
+.testimonial {
+  padding: 3rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.075);
+}
+
+.testimonial--1 {
+  grid-row: 1/2;
+  grid-column: 1 / span 2;
+  background-color: rgb(117, 65, 200);
+}
+
+.testimonial--2 {
+  background-color: rgb(72, 85, 106);
+}
+
+.testimonial--3 {
+  background-color: #fff;
+}
+
+.testimonial--4 {
+  grid-column: 2/ 4;
+  background-color: rgb(25, 33, 46);
+}
+
+.testimonial--5 {
+  grid-row: 1/-1;
+  grid-column: 4 / 5;
+  background-color: #fff;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.test__img {
+  border-radius: 50%;
+  width: 3.8rem;
+  border: 0.1rem solid #cfcfcf;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.name {
+  color: #cfcfcf;
+  font-size: 1.2rem;
+}
+.designation {
+  color: rgba(207, 207, 207, 0.4);
+  font-size: 1rem;
+}
+
+.description {
+  font-size: 2rem;
+  color: #fff;
+  font-weight: 600;
+  margin: 2rem 0;
+  line-height: 1.2;
+}
+.quote {
+  font-size: 1.3rem;
+  color: rgba(207, 207, 207, 0.4);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.testimonial--3 .name,
+.testimonial--5 .name {
+  color: #555;
+}
+
+.testimonial--3 .designation,
+.testimonial--5 .designation {
+  color: rgba(207, 207, 207);
+}
+
+.testimonial--3 .description,
+.testimonial--5 .description {
+  color: #555;
+  font-size: 2.4rem;
+}
+
+.testimonial--3 .quote,
+.testimonial--5 .quote {
+  color: rgb(185, 185, 185);
+}
+
+.testimonial--1::before {
+  content: "\201C";
+  position: absolute;
+  top: 0.1rem;
+  left: 40rem;
+  line-height: 1;
+  font-size: 40rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: sans-serif;
+  z-index: 1;
+  transform: rotate(4deg);
+}
