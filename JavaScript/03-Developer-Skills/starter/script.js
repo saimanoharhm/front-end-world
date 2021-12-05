@@ -68,9 +68,27 @@
 // };
 
 // const amplitudeBug = calTempAmplitudeBug([3, 5, 1], [9, 4, 5]);
-
 // //A) Identify
 // console.log(amplitudeBug);
+
+// const measureKelvin = function () {
+//   const measurement = {
+//     type: 'temp',
+//     unit: 'celsius',
+
+//     // C) FIX
+//     value: Number(prompt('Degrees celsius: ')),
+//   };
+
+//   // B) FIND
+//   console.table(measurement);
+
+//   const kelvin = measurement.value + 273;
+//   return kelvin;
+// };
+
+// // A) IDENTIFY
+// console.log(measureKelvin());
 
 //Challenge-1
 /*
@@ -88,9 +106,11 @@ Test data:
 */
 
 const printForecast = arr => {
+  let str = '';
   for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i] + 'ºC in ' + (i + 1) + ' days...');
+    str = str + `${arr[i]}ºC in ${i + 1} days ... `;
   }
+  console.log('...' + str);
 };
 
 printForecast([17, 21, 23]);
