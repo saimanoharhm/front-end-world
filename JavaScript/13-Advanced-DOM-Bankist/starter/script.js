@@ -36,38 +36,35 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-////Button Scrolling ////
-
 btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
+  // const s1coords = section1.getBoundingClientRect();
+  // console.log(s1coords);
 
-  console.log(e.target.getBoundingClientRect());
+  // console.log(e.target.getBoundingClientRect());
 
-  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
-
-  console.log(
-    'Height/Width viewport: ',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
-
+  // console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+  // console.log(
+  //   'Height/width viewport',
+  //   document.documentElement.clientHeight,
+  //   document.documentElement.clientWidth
+  // );
   // Scrolling
   // window.scrollTo(
   //   s1coords.left + window.pageXOffset,
   //   s1coords.top + window.pageYOffset
   // );
-
+  // Old Way of doing
   // window.scrollTo({
   //   left: s1coords.left + window.pageXOffset,
   //   top: s1coords.top + window.pageYOffset,
   //   behavior: 'smooth',
-  // }); // Old Version
-
-  section1.scrollIntoView({ behavior: 'smooth' }); // Modern version
+  // });
+  // Modern Way
+  section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-////Page Navigation ////
+////////////////////////////////
+// Page Navigation
 
 // document.querySelectorAll('.nav__link').forEach(function (el) {
 //   el.addEventListener('click', function (e) {
@@ -81,40 +78,40 @@ btnScrollTo.addEventListener('click', function (e) {
 // 1. Add event listener to common parent element
 // 2. Determine what element originated the event
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  console.log(e.target);
+  e.preventDefault();
 
   // Matching strategy
   if (e.target.classList.contains('nav__link')) {
-    e.preventDefault();
     const id = e.target.getAttribute('href');
-    console.log(id);
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
-
-/// Tabbed Components
+////////////////////////////////
+/////// Tabbed Component ///////
 
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
 
   // Guard clause
   if (!clicked) return;
 
-  // Remove active classes for tab and content area
+  // Active tab
   tabs.forEach(t => t.classList.remove('operations__tab--active'));
   tabsContent.forEach(c => c.classList.remove('operations__content--active'));
-
-  // Activate Tab
   clicked.classList.add('operations__tab--active');
 
-  // Activate content area
+  // Activate Content area
+  console.log(clicked.dataset.tab);
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
 
-// Menu fade animation
-const handlerHover = e => {
+///////////////////////////////////
+/////// Menu fade animation ///////
+
+const handleHover = function (e) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
@@ -127,30 +124,27 @@ const handlerHover = e => {
   }
 };
 
-// nav.addEventListener('mouseover', e => {
-//   handlerHover(e, 0.5);
+// Passing "argument" into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
+// nav.addEventListener('mouseover', function (e) {
+//   handleHover(e, 0.5);
+// });
+// nav.addEventListener('mouseout', function (e) {
+//   handleHover(e, 1);
 // });
 
-// nav.addEventListener('mouseout', e => {
-//   handlerHover(e, 1);
-// });
-nav.addEventListener('mouseover', handlerHover.bind(0.5));
-
-nav.addEventListener('mouseout', handlerHover.bind(1));
-
-// Sticky Navigation
-// const inititalCoords = section1.getBoundingClientRect();
-// console.log(inititalCoords);
-
-// window.addEventListener('scroll', function (e) {
-//   console.log(window.scrollY);
-
-//   if (window.scrollY > inititalCoords.top) nav.classList.add('sticky');
+///////////////////////////////////
+/////// Sticky Navigation /////////
+// Method-1 (Old Way of doing)
+// const initialCoords = section1.getBoundingClientRect();
+// window.addEventListener('scroll', function () {
+//   if (this.window.scrollY > initialCoords.top) nav.classList.add('sticky');
 //   else nav.classList.remove('sticky');
 // });
 
-// Sticky Navigation: Intersection Observer API
-// const obsCallback = function (entries, observer) {
+// Method -2 (The Intersection Observer API)
+// const obsCallback = (entries, observer) => {
 //   entries.forEach(entry => {
 //     console.log(entry);
 //   });
@@ -158,7 +152,7 @@ nav.addEventListener('mouseout', handlerHover.bind(1));
 
 // const obsOptions = {
 //   root: null,
-//   threshold: [0, 0.2],
+//   threshold: 0.2,
 // };
 
 // const observer = new IntersectionObserver(obsCallback, obsOptions);
@@ -166,70 +160,60 @@ nav.addEventListener('mouseout', handlerHover.bind(1));
 
 const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
-
-const stickyNav = function (entries) {
-  console.log(entries);
+const stickyNav = entries => {
   const [entry] = entries;
-  console.log(entry);
   if (!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 };
-
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
   threshold: 0,
   rootMargin: `-${navHeight}px`,
 });
-
 headerObserver.observe(header);
 
-// Reveal Section
-const allsections = document.querySelectorAll('.section');
-const revealSection = function (entries, observer) {
+///////////////////////////////////
+/////// Reveal Section /////////
+
+const allSections = document.querySelectorAll('.section');
+const revealSection = function (entries, obsever) {
   const [entry] = entries;
   if (!entry.isIntersecting) return;
   entry.target.classList.remove('section--hidden');
-  observer.unobserve(entry.target);
+  obsever.unobserve(entry.target);
 };
-
 const sectionObserver = new IntersectionObserver(revealSection, {
   root: null,
   threshold: 0.15,
 });
-allsections.forEach(section => {
+allSections.forEach(section => {
   sectionObserver.observe(section);
-  // section.classList.add('section--hidden');
+  section.classList.add('section--hidden');
 });
 
-// Lazy Loading images
-const imgTargets = document.querySelectorAll('img[data-src]');
+/////////////////////////////////////
+/////// Lazy Loading Images /////////
 
+const imgTargets = document.querySelectorAll('img[data-src]');
 const loadImg = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
-
   if (!entry.isIntersecting) return;
-
   // Replace src with data-src
   entry.target.src = entry.target.dataset.src;
-
   entry.target.addEventListener('load', function () {
     entry.target.classList.remove('lazy-img');
   });
-
   observer.unobserve(entry.target);
 };
-
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
-  rootMargin: `-200px`,
+  rootMargin: '200px',
 });
-
 imgTargets.forEach(img => imgObserver.observe(img));
 
-///////////////////////////////////////
-// Slider
+//////////////////////////////////////
+///////// Slider Component //////////
 const slider = function () {
   const slides = document.querySelectorAll('.slide');
   const btnLeft = document.querySelector('.slider__btn--left');
@@ -314,179 +298,182 @@ const slider = function () {
 };
 slider();
 
-// /////Selecting Elements /////
-// console.log(document.documentElement);
-// console.log(document.head);
-// console.log(document.body);
+////////////////////////////////
+// Selecting, Creating, and Deleting Elements //
+/*
 
-// const header = document.querySelector('.header');
-// const allSections = document.querySelectorAll('.section');
-// console.log(allSections);
-// document.getElementById('section--1');
-// const allButtons = document.getElementsByTagName('button');
-// console.log(allButtons);
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
 
-// console.log(document.getElementsByClassName('btn'));
+const header = document.querySelector('.header');
+const allSections = document.querySelectorAll('.section');
+console.log(allSections);
 
-// //// Creating and Inserting Elements //////
-// // .insertAdjacentHTML
+document.getElementById('section--1');
+const allButtons = document.getElementsByTagName('button');
+console.log(allButtons);
 
-// const message = document.createElement('div');
-// message.classList.add('cookie-message');
-// message.innerHTML =
-//   'We use cookies for improved functionality and analytics. <button class="btn btn--class-cookie">Got it!</button>';
+console.log(document.getElementsByClassName('btn'));
 
-// // header.prepend(message);
-// header.append(message);
-// // header.append(message.cloneNode(true));
+// Creating and inserting elements
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+// message.textContent = 'We use cookies for improved functionality and analytics';
+message.innerHTML =
+  'We use cookies for improved functionality and analytics. <button class="btn btn--close--cookie">Got it!</button>';
 
-// // header.after(message);
-// // header.before(message);
+// header.prepend(message);
+header.append(message);
+// header.append(message.cloneNode(true));
 
-// ////Delete Element////
-// document
-//   .querySelector('.btn--class-cookie')
-//   .addEventListener('click', function () {
-//     // message.remove(); // Latest version
-//     message.parentElement.removeChild(message); // The old version
-//   });
+// header.before(message);
+// header.after(message);
 
-// // /// Styles ///
-// message.style.backgroundColor = '#37383d';
-// message.style.width = '120%';
+// Delete Elements
+document
+  .querySelector('.btn--close--cookie')
+  .addEventListener('click', function () {
+    message.remove();
+    // Alternative Old way of doing it!
+    // message.parentElement.removeChild(message);
+  });
 
-// // console.log(message.style.color);
-// // console.log(message.style.backgroundColor);
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
 
-// // console.log(getComputedStyle(message).color);
+console.log(message.style.color);
+console.log(message.style.backgroundColor);
+console.log(getComputedStyle(message).backgroundColor);
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
 
-// message.style.height =
-//   Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
 
-// document.documentElement.style.setProperty('--color-primary', 'orangered');
+document.documentElement.style.setProperty('--color-primary', 'orangered');
 
-// /// Attributes ///
-// const logo = document.querySelector('.nav__logo');
-// console.log(logo.alt);
-// // console.log(logo);
-// console.log(logo.src);
-// console.log(logo.className);
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
 
-// logo.alt = 'Beautiful minimalist logo';
+logo.alt = 'Beautiful minimalist logo';
 
-// // Non-standard
-// console.log(logo.designer);
-// console.log(logo.getAttribute('designer'));
-// logo.setAttribute('company', 'Banklist');
+// Non-standard
+console.log(logo.designer);
+console.log(logo.getAttribute('designer'));
+logo.setAttribute('company', 'Bankist');
 
-// console.log(logo.src);
-// console.log(logo.getAttribute('designer'));
-// logo.setAttribute('company', 'Banklist');
+console.log(logo.src);
+console.log(logo.getAttribute('src'));
 
-// console.log(logo.src);
-// console.log(logo.getAttribute('src'));
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href);
+console.log(link.getAttribute('href'));
 
-// const link = document.querySelector('.nav__link--btn');
+// Data attributes
+console.log(logo.dataset.versionNumber);
 
-// console.log(link.href);
-// console.log(link.getAttribute('href'));
+// Classes
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c'); // NOT includes
 
-// // Data attributes
-// console.log(logo.dataset.versionNumber);
+// Don't use
+logo.className = 'sai';
+*/
+/*
+const h1 = document.querySelector('h1');
+const alertH1 = function () {
+  alert('addEventListener: Great! You are reading the heading :D');
+};
 
-// //classes
-// logo.classList.add('a', 's', 'm');
-// logo.classList.add('hk');
-// logo.classList.remove('a', 's', 'hk');
-// // logo.classList.toggle('a');
-// logo.classList.contains('a'); // not includes
+h1.addEventListener('mouseenter', alertH1);
 
-// /// Don't use
-// logo.className;
-
-// const h1 = document.querySelector('h1');
-
-// const alertH1 = function (e) {
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+// h1.onmouseenter = function (e) {
 //   alert('addEventListener: Great! You are reading the heading :D');
 // };
 
-// h1.addEventListener('mouseenter', alertH1);
+// rgb(255,255,255)
 
-// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
-// // h1.onmouseenter = function (e) {
-// //   alert('addEventListener: Great! You are reading the heading :D');
-// // };
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+console.log(randomColor());
 
-// // rgb(255,255,255)
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK: ', e.target, e.currentTarget);
+  // console.log(e.currentTarget === this);
 
-// const randomInt = (min, max) =>
-//   Math.floor(Math.random() * (max - min * 1) + min);
+  // Stop Propagation
+  // e.stopPropagation();
+});
 
-// const randomColor = () =>
-//   `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER: ', e.target, e.currentTarget);
+  // console.log(e.currentTarget === this);
+});
 
-// console.log(randomColor(0, 255));
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('NAV: ', e.target, e.currentTarget);
+    // console.log(e.currentTarget === this);
+  },
+  true
+);
+*/
+/*
+const h1 = document.querySelector('h1');
 
-// document.querySelector('.nav__link').addEventListener('click', function (e) {
-//   this.style.backgroundColor = randomColor();
-//   console.log('LINK', e.target, e.currentTarget);
-//   console.log(e.currentTarget === this);
+// Going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
 
-//   // Stop Propagation
-//   e.stopPropagation();
-// });
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
 
-// document.querySelector('.nav__links').addEventListener('click', function (e) {
-//   this.style.backgroundColor = randomColor();
-//   console.log('CONTAINER', e.target, e.currentTarget);
-//   console.log(e.currentTarget === this);
-// });
-// document.querySelector('.nav').addEventListener('click', function (e) {
-//   this.style.backgroundColor = randomColor();
-//   console.log('NAV', e.target, e.currentTarget);
-//   console.log(e.currentTarget === this);
-// });
+// Going upwards: parent
+console.log(h1.parentNode);
+console.log(h1.parentElement);
 
-// const h1 = document.querySelector('h1');
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+h1.closest('h1').style.background = 'var(--gradient-primary)';
 
-// // Going downwards: child
-// console.log(h1.querySelectorAll('.highlight'));
-// console.log(h1.childNodes);
-// console.log(h1.children);
-// h1.firstElementChild.style.color = 'white';
-// h1.lastElementChild.style.color = 'orangered';
+// Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
 
-// // Going upwards parents
-// console.log(h1.parentNode);
-// console.log(h1.parentElement);
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
 
-// h1.closest('.header').style.background = 'var(--gradient-secondary)';
-
-// h1.closest('h1').style.background = 'var(--gradient-primary)';
-
-// // Going sideways: siblings
-// console.log(h1.previousElementSibling);
-// console.log(h1.nextElementSibling);
-
-// console.log(h1.previousSibling);
-// console.log(h1.nextSibling);
-
-// console.log(h1.parentElement.children);
-// [...h1.parentElement.children].forEach(function (el) {
-//   if (el !== h1) el.style.transform = 'scale(0.5)';
-// });
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(el => {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
+});
+*/
 
 document.addEventListener('DOMContentLoaded', function (e) {
   console.log('HTML parsed and DOM tree built!', e);
-}); // It will triger once after html and js code is loaded and it won't wait for other external files and images to load whereas window it will wait for everything to load.  
-
-window.addEventListener('load',function(e){
-  console.log('Page fully loaded',e);
 });
 
-window.addEventListener('beforeunload',function(e){
-  e.preventDefault();
-  console.log(e);
-  e.returnValue = '';
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e);
 });
+
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
