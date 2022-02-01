@@ -9,7 +9,6 @@ import LoadingSpinner from "../components/UI/LoadingSpinner";
 const QuoteDetail = () => {
   const match = useRouteMatch();
   const params = useParams();
-
   const { quoteId } = params;
 
   const {
