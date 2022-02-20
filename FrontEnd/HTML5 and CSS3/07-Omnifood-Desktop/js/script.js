@@ -1,5 +1,4 @@
 // console.log("Hello World!");
-
 // Set current year
 const yearEl = document.querySelector(".year");
 const currentYear = new Date().getFullYear();
@@ -48,7 +47,6 @@ allLinks.forEach(function (link) {
 // Sticky navigation
 
 const sectionHeroEl = document.querySelector(".section-hero");
-
 const obs = new IntersectionObserver(
   function (entries) {
     const ent = entries[0];
