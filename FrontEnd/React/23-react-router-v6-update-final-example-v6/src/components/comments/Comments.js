@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-
 import classes from './Comments.module.css';
 import NewCommentForm from './NewCommentForm';
 import useHttp from '../../hooks/use-http';
@@ -32,7 +31,7 @@ const Comments = () => {
 
   if (status === 'pending') {
     comments = (
-      <div className='centered'>
+      <div className="centered">
         <LoadingSpinner />
       </div>
     );
@@ -46,14 +45,14 @@ const Comments = () => {
     status === 'completed' &&
     (!loadedComments || loadedComments.length === 0)
   ) {
-    comments = <p className='centered'>No comments were added yet!</p>;
+    comments = <p className="centered">No comments were added yet!</p>;
   }
 
   return (
     <section className={classes.comments}>
       <h2>User Comments</h2>
       {!isAddingComment && (
-        <button className='btn' onClick={startAddCommentHandler}>
+        <button className="btn" onClick={startAddCommentHandler}>
           Add a Comment
         </button>
       )}
